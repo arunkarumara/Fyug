@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes Viewer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Notes App</div>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <ul id="nav-links">
+        <li><a href="#semester1">Semester 1</a></li>
+        <li><a href="#semester2">Semester 2</a></li>
+        <!-- Add for all semesters -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="viewer" class="pdf-viewer">
+      <iframe id="pdf-frame" src="" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <section id="semesters">
+      <!-- Repeat for all 8 semesters -->
+      ${[...Array(8)].map((_, semIndex) => `
+        <div class="semester" id="semester${semIndex + 1}">
+          <h2>Semester ${semIndex + 1}</h2>
+          <div class="subjects">
+            ${[...Array(6)].map((_, subIndex) => `
+              <button onclick="viewPDF('pdfs/sem${semIndex + 1}/subject${subIndex + 1}.pdf')">
+                Subject ${subIndex + 1}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
